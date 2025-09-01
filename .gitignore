@@ -1,0 +1,74 @@
+# Ignore Visual Studio Code specific files
+.vscode/*
+/.vscode/settings.json
+/.vscode/tasks.json
+/.vscode/launch.json
+/.vscode/extensions.json
+*.code-workspace
+/.github
+
+# Ignore macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+__MACOSX
+
+# Ignore Rider specific files
+.idea/
+
+# Ignore Visual Studio specific files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore .NET build outputs
+[Bb]in/
+[Oo]bj/
+
+# Ignore .NET temporary files and caches
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# Ignore generated files
+*.generated.cs
+
+# Ignore test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+
+# Ignore user secrets and local settings
+secrets.json
+appsettings.Development.json
+user-secrets/
+*.env
+
+# Ignore package files
+*.nupkg
+*.snupkg
+*.symbols.nupkg
+
+# Ignore log files and temporary files
+[Ll]ogs/
+*.log
+*.tmp
+*.swp
+
+# Ignore compiled files
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.exe.config
+
+# Ignore publishing artifacts
+[Rr]elease/
+publish/
