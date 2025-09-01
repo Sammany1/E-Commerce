@@ -17,7 +17,8 @@ public class Program
         builder.Services.AddOpenApi();
 
         builder.Services.AddDbContext<eCommerceDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("Defualt Connection")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly("eCommerce.Infrastructure")));
 
         var app = builder.Build();
 
