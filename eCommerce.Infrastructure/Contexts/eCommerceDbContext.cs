@@ -19,7 +19,47 @@ public class eCommerceDbContext : DbContext
         modelBuilder.Entity<Product>()
             .Property(p => p.Price)
             .HasPrecision(18, 2);
-        
+
+        modelBuilder.Entity<User>()
+            .Property(e => e.CreatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Product>()
+            .Property(e => e.CreatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Merchant>()
+            .Property(e => e.CreatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Category>()
+            .Property(e => e.CreatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<User>()
+            .Property(e => e.UpdatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAddOrUpdate();
+
+        modelBuilder.Entity<Product>()
+            .Property(e => e.UpdatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAddOrUpdate();
+
+        modelBuilder.Entity<Merchant>()
+            .Property(e => e.UpdatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAddOrUpdate();
+
+        modelBuilder.Entity<Category>()
+            .Property(e => e.UpdatedAt)
+            .HasDefaultValueSql("GETDATE()")
+            .ValueGeneratedOnAddOrUpdate();
+
         base.OnModelCreating(modelBuilder);
     }
 }

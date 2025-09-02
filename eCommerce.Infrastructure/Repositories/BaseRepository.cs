@@ -38,5 +38,4 @@ public class BaseRepository<T>(eCommerceDbContext context) : IBaseRepository<T> 
         await _context.SaveChangesAsync();
     }
 
-
 }
