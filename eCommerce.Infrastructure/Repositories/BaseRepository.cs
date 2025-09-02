@@ -24,7 +24,8 @@ public class BaseRepository<T>(eCommerceDbContext context) : IBaseRepository<T> 
     }
     public async Task Create(T entity)
     {
-        await _table.AddAsync(entity);
+        _table.Add(entity);
+        await _context.SaveChangesAsync();
     }
     public async Task Update(T entity)
     {

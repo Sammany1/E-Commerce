@@ -1,5 +1,6 @@
 
 using eCommerce.Infrastructure.Contexts;
+using eCommerce.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.API;
@@ -13,12 +14,16 @@ public class Program
         // Add services to the container.
         builder.Services.AddAuthorization();
 
+        builder.Services.AddControllers();
+
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
         builder.Services.AddDbContext<eCommerceDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly("eCommerce.Infrastructure")));
+
+        builder.Services.AddInfrastrucutureServices(builder.Configuration);
 
         var app = builder.Build();
 
@@ -31,6 +36,8 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+
+        app.MapControllers();
 
         app.Run();
     }

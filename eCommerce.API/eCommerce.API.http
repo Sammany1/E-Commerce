@@ -1,6 +1,25 @@
-@eCommerce.API_HostAddress = http://localhost:5214
+@rootURL = http://localhost:5214
 
-GET {{eCommerce.API_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{rootURL}}
 
 ###
+POST {{rootURL}}/register
+Content-Type: application/json
+
+{
+  "username": "smsm",
+  "firstName": "Abdelrahman",
+  "lastName": "Alsammany", 
+  "password": "123",
+  "email": "smsm@nu.com",
+  "dateOfBirth": "2003-09-05"
+}
+
+###
+POST {{rootURL}}/login
+Content-Type: application/json
+
+{
+  "username": "smsm1",
+  "password": "123"
+}
