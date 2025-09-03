@@ -36,16 +36,7 @@ public class AuthService : IAuthService
             Data = new AuthResponse
             {
                 Token = generatedToken,
-                User = new UserDto
-                {
-                    Id = user.Id,
-                    Username = user.Username,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Role = user.Role.ToString(),
-                    DateOfBirth = user.DateOfBirth
-                }
+                User = new UserDto(user)
             }
         };
     }
@@ -82,16 +73,7 @@ public class AuthService : IAuthService
             Data = new AuthResponse
             {
                 Token = generatedToken,
-                User = new UserDto
-                {
-                    Id = user.Id,
-                    Username = user.Username,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Role = user.Role.ToString(),
-                    DateOfBirth = user.DateOfBirth
-                }
+                User = new UserDto(user)
             }
         };
     }

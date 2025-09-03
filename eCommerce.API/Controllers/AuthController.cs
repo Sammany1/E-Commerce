@@ -1,6 +1,5 @@
 using eCommerce.Application.Services;
 using eCommerce.Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.API.Controllers
@@ -16,7 +15,7 @@ namespace eCommerce.API.Controllers
         }
 
         [HttpPost]
-        [Route("/login")]
+        [Route("login")]
         public async Task<ActionResult> Login(LoginUserRequest loginUser)
         {
             LoginResult loginResult = await _authService.Login(loginUser);
@@ -27,7 +26,7 @@ namespace eCommerce.API.Controllers
         }
 
         [HttpPost]
-        [Route("/register")]
+        [Route("register")]
         public async Task<ActionResult> Register(RegisterUserRequest registerUser)
         {
             RegisterResult registerResult = await _authService.Register(registerUser);
