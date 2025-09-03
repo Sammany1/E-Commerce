@@ -22,5 +22,11 @@ public class UserRepository(eCommerceDbContext context) : BaseRepository<User>(c
     {
         return await _users.AnyAsync(u => u.Email == email.ToLower());
     }
+    public async Task<(bool usernameExists, bool emailExists)> CheckUsernameAndEmailExistsAsync(string username, string email)
+    {
+        var usernameExists = await _users.AnyAsync(u => u.Username.ToLower() == username.ToLower());
+        var emailExists = await _users.AnyAsync(u => u.Email == email.ToLower());
 
+        return (usernameExists, emailExists);
+    }
 }

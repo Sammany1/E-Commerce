@@ -28,13 +28,13 @@ namespace eCommerce.API.Controllers
 
         [HttpPost]
         [Route("/register")]
-        public async Task<ActionResult<User>> Register(RegisterUserRequest registerUser)
+        public async Task<ActionResult> Register(RegisterUserRequest registerUser)
         {
             RegisterResult registerResult = await _authService.Register(registerUser);
             if (registerResult.Success == false)
                 return BadRequest(registerResult.Message);
 
-            return CreatedAtAction(nameof(Login), new { id = registerResult.user.Id }, registerResult.user);
+            return StatusCode(201, registerResult.Data);
         }
     }
 }

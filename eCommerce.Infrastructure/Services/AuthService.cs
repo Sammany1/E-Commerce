@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using static BCrypt.Net.BCrypt;
 using eCommerce.Application.Repositories;
 using eCommerce.Application.Services;
@@ -8,35 +9,62 @@ namespace eCommerce.Infrastructure.Services;
 public class AuthService : IAuthService
 {
     private readonly IUserRepository _userRepository;
+    private readonly ITokenService _tokenService;
 
-    public AuthService(IUserRepository userRepository)
+    public AuthService(IUserRepository userRepository, ITokenService tokenService)
     {
         _userRepository = userRepository;
+        _tokenService = tokenService;
     }
     public async Task<LoginResult> Login(LoginUserRequest loginUser)
     {
+        if (string.IsNullOrEmpty(loginUser.Username))
+            return new LoginResult { Success = false, Message = "Username is Required" };
+        if (string.IsNullOrEmpty(loginUser.Password))
+            return new LoginResult { Success = false, Message = "Password is Required" };
+
         User user = await _userRepository.GetUserByUsername(loginUser.Username);
         if (user == null)
             return new LoginResult { Success = false, Message = "User not found" };
 
         if (!Verify(loginUser.Password, user.Password))
             return new LoginResult { Success = false, Message = "Wrong Password" };
-
-        return new LoginResult { Success = true, user = user };
-        // and token 
-
+        string generatedToken = _tokenService.GenerateToken(user.Username, user.Email, user.Role.ToString());
+        return new LoginResult
+        {
+            Success = true,
+            Data = new AuthResponse
+            {
+                Token = generatedToken,
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Role = user.Role.ToString(),
+                    DateOfBirth = user.DateOfBirth
+                }
+            }
+        };
     }
 
     public async Task<RegisterResult> Register(RegisterUserRequest registerUser)
     {
 
-        // manage Null fields 
-        
-        if (await _userRepository.UsernameExistsAsync(registerUser.Username))
+        RegisterResult validationResult = ValidateRegistrationRequest(registerUser);
+        if (validationResult != null)
+            return validationResult;
+
+        var (usernameExists, emailExists) = await _userRepository.CheckUsernameAndEmailExistsAsync(registerUser.Username, registerUser.Email);
+
+        if (usernameExists)
             return new RegisterResult { Success = false, Message = "Username Already Exist" };
 
-        if (await _userRepository.EmailExistsAsync(registerUser.Email))
+        if (emailExists)
             return new RegisterResult { Success = false, Message = "Email Already Exist" };
+
         User user = new User
         {
             Username = registerUser.Username,
@@ -47,7 +75,63 @@ public class AuthService : IAuthService
             DateOfBirth = registerUser.DateOfBirth,
         };
         await _userRepository.Create(user);
-        User createdUser = await _userRepository.GetById(user.Id);
-        return new RegisterResult { Success = true, user = createdUser };
+        string generatedToken = _tokenService.GenerateToken(user.Username, user.Email, user.Role.ToString());
+        return new RegisterResult
+        {
+            Success = true,
+            Data = new AuthResponse
+            {
+                Token = generatedToken,
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Role = user.Role.ToString(),
+                    DateOfBirth = user.DateOfBirth
+                }
+            }
+        };
+    }
+
+    private RegisterResult ValidateRegistrationRequest(RegisterUserRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.Username))
+            return new RegisterResult { Success = false, Message = "Username is required" };
+
+        if (string.IsNullOrWhiteSpace(request.FirstName))
+            return new RegisterResult { Success = false, Message = "First name is required" };
+
+        if (string.IsNullOrWhiteSpace(request.LastName))
+            return new RegisterResult { Success = false, Message = "Last name is required" };
+
+        if (string.IsNullOrWhiteSpace(request.Password))
+            return new RegisterResult { Success = false, Message = "Password is required" };
+
+        if (request.Password.Length < 6)
+            return new RegisterResult { Success = false, Message = "Password must be at least 6 characters" };
+
+        if (string.IsNullOrWhiteSpace(request.Email))
+            return new RegisterResult { Success = false, Message = "Email is required" };
+
+        if (!IsValidEmail(request.Email))
+            return new RegisterResult { Success = false, Message = "Invalid email format" };
+
+        return null;
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        try
+        {
+            var addr = new MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

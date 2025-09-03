@@ -10,7 +10,7 @@ Content-Type: application/json
   "username": "smsm",
   "firstName": "Abdelrahman",
   "lastName": "Alsammany", 
-  "password": "123",
+  "password": "123456",
   "email": "smsm@nu.com",
   "dateOfBirth": "2003-09-05"
 }
@@ -20,6 +20,19 @@ POST {{rootURL}}/login
 Content-Type: application/json
 
 {
-  "username": "smsm1",
+  "username": "smsm",
   "password": "123"
+}
+
+###
+POST {{rootURL}}/register
+Content-Type: application/json
+
+{
+  "username": "test",
+  "firstName": "test",
+  "lastName": "test", 
+  "password": "123456",
+  "email": "test@nu.com",
+  "dateOfBirth": "2000-01-01"
 }
