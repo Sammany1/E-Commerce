@@ -1,7 +1,6 @@
 using eCommerce.Application.Services;
-using eCommerce.Domain.Models;
+using eCommerce.Application.DTOs;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.API.Controllers

@@ -16,6 +16,8 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IMerchantRepository, MerchantRepository>();
+        services.AddScoped<IMerchantService, MerchantService>();
 
         return services;
     }

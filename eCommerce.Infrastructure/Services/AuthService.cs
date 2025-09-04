@@ -2,6 +2,7 @@ using System.Net.Mail;
 using static BCrypt.Net.BCrypt;
 using eCommerce.Application.Repositories;
 using eCommerce.Application.Services;
+using eCommerce.Application.DTOs;
 using eCommerce.Domain.Models;
 
 namespace eCommerce.Infrastructure.Services;
@@ -29,7 +30,7 @@ public class AuthService : IAuthService
 
         if (!Verify(loginUser.Password, user.Password))
             return new LoginResult { Success = false, Message = "Wrong Password" };
-        string generatedToken = _tokenService.GenerateToken(user.Username, user.Email, user.Role.ToString());
+        string generatedToken = _tokenService.GenerateToken(user.Id, user.Username, user.Email, user.Role.ToString());
         return new LoginResult
         {
             Success = true,
@@ -41,7 +42,7 @@ public class AuthService : IAuthService
         };
     }
 
-    public async Task<RegisterResult> Register(RegisterUserRequest registerUser)
+    public async Task<RegisterResult> Register(RegisterUserRequest registerUser, UserRole role = UserRole.Customer)
     {
 
         RegisterResult validationResult = ValidateRegistrationRequest(registerUser);
@@ -62,11 +63,12 @@ public class AuthService : IAuthService
             FirstName = registerUser.FirstName,
             LastName = registerUser.LastName,
             Password = HashPassword(registerUser.Password),
+            Role = role,
             Email = registerUser.Email.ToLower(),
             DateOfBirth = registerUser.DateOfBirth,
         };
         await _userRepository.Create(user);
-        string generatedToken = _tokenService.GenerateToken(user.Username, user.Email, user.Role.ToString());
+        string generatedToken = _tokenService.GenerateToken(user.Id, user.Username, user.Email, user.Role.ToString());
         return new RegisterResult
         {
             Success = true,
@@ -80,11 +82,10 @@ public class AuthService : IAuthService
 
     public async Task<RegisterResult> RegisterAdmin(RegisterUserRequest registerUser)
     {
-        RegisterResult registerResult = await Register(registerUser);
-        registerResult.Data.User.Role = UserRole.Admin;
+        RegisterResult registerResult = await Register(registerUser, UserRole.Admin);
         return registerResult;
     }
-    
+
     private RegisterResult ValidateRegistrationRequest(RegisterUserRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.Username))

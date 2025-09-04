@@ -1,4 +1,4 @@
-namespace eCommerce.Domain.Models;
+namespace eCommerce.Application.DTOs;
 
 public class AuthResponse
 {

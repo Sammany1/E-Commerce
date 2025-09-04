@@ -1,4 +1,4 @@
-using eCommerce.Domain.Models;
+using eCommerce.Application.DTOs;
 
 namespace eCommerce.Application.Services;
 

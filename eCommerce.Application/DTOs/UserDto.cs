@@ -1,4 +1,6 @@
-namespace eCommerce.Domain.Models;
+using eCommerce.Domain.Models;
+
+namespace eCommerce.Application.DTOs;
 
 public class UserDto
 {

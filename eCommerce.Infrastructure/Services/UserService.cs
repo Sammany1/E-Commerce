@@ -1,5 +1,6 @@
 using eCommerce.Application.Repositories;
 using eCommerce.Application.Services;
+using eCommerce.Application.DTOs;
 using eCommerce.Domain.Models;
 
 namespace eCommerce.Infrastructure.Services;

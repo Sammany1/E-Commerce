@@ -1,6 +1,5 @@
 @rootURL = http://localhost:5214/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzbXNtU3VwZXJBZG1pbiIsImVtYWlsIjoic21zbUBzdXBlcmFkbWluLmNvbSIsImp0aSI6IjI5NDgzOTMyLTczMDgtNDNiZC1iODIyLWU2Zjc3ODQ3YmZhZiIsInJvbGUiOiJTdXBlckFkbWluIiwibmJmIjoxNzU3MDA2ODM5LCJleHAiOjE3NTcwMTA0MzksImlhdCI6MTc1NzAwNjgzOSwiaXNzIjoiZWNvbW1lcmNlLWFwaSIsImF1ZCI6ImVjb21tZXJjZS1jbGllbnQifQ.cXb8uHSVqnxCXuxG5LurR0R7edflFm9eVco69D0oynU
-GET {{rootURL}}
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDA2Iiwic3ViIjoic21zbUFkbWluIiwiZW1haWwiOiJzbXNtQGFkbWluLmNvbSIsImp0aSI6Ijk1YWEzZWMyLTIyZDAtNDM5Ni1hZGFhLTE4OTI3NTViMGJiZCIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc1NzAxMzYxMiwiZXhwIjoxNzU3MDE3MjEyLCJpYXQiOjE3NTcwMTM2MTIsImlzcyI6ImVjb21tZXJjZS1hcGkiLCJhdWQiOiJlY29tbWVyY2UtY2xpZW50In0.SDMYderP6ISkq0wgOG67qNEjCqdy5bsBt9l9ewat3Xo
 
 ###
 POST {{rootURL}}/auth/register
@@ -29,7 +28,7 @@ Authorization: Bearer {{token}}
   "dateOfBirth": "2003-09-05"
 }
 
-###
+### CUSTOMER
 POST {{rootURL}}/auth/login
 Content-Type: application/json
 
@@ -38,7 +37,16 @@ Content-Type: application/json
   "password": "123"
 }
 
-###
+### ADMIN
+POST {{rootURL}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "smsmAdmin",
+  "password": "123456"
+}
+
+### SUPER ADMIN
 POST {{rootURL}}/auth/login
 Content-Type: application/json
 
@@ -64,3 +72,15 @@ Content-Type: application/json
 GET  {{rootURL}}/user/smsm
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+
+###
+POST {{rootURL}}/merchant
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "merchantName": "Pizza King"
+}
+
+###

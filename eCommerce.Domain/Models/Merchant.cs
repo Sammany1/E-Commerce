@@ -10,4 +10,10 @@ public class Merchant : BaseEntity
     public User User { get; set; }
     public int AdminId { get; set; }
     public ICollection<Product> Products { get; set; }
+
+    public Merchant(string merchantName, int adminId)
+    {
+        MerchantName = merchantName;
+        AdminId = adminId;
+    }
 }
