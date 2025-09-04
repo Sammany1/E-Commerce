@@ -84,3 +84,5 @@ Authorization: Bearer {{token}}
 }
 
 ###
+GET {{rootURL}}/merchant/search?name=pizza
+Authorization: Bearer {{token}}

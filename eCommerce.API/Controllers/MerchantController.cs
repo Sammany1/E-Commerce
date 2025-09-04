@@ -8,6 +8,7 @@ namespace eCommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MerchantController : ControllerBase
     {
         private readonly IMerchantService _merchant;
@@ -26,8 +27,15 @@ namespace eCommerce.API.Controllers
             MerchantDto merchantDto = await _merchant.Create(merchant.MerchantName, int.Parse(adminIdString));
             if (merchantDto == null)
                 return BadRequest("merchant name already exist!");
-            
+
             return StatusCode(201, merchantDto);
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<MerchantDto>>> SearchMerchants([FromQuery] string name)
+        {
+            var merchants = await _merchant.SearchMerchantsByName(name);
+            return Ok(merchants);
         }
     }
 }
