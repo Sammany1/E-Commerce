@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using eCommerce.Infrastructure.Contexts;
 using eCommerce.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -44,6 +45,12 @@ public class Program
             });
 
         builder.Services.AddAuthorization();
+
+        builder.Services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
         var app = builder.Build();
 

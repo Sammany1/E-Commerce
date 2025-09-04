@@ -6,4 +6,6 @@ public interface IAuthService
 {
     public Task<LoginResult> Login(LoginUserRequest loginUser);
     public Task<RegisterResult> Register(RegisterUserRequest registerUser);
+    public Task<RegisterResult> RegisterAdmin(RegisterUserRequest registerUser);
+
 }

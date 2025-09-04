@@ -78,6 +78,13 @@ public class AuthService : IAuthService
         };
     }
 
+    public async Task<RegisterResult> RegisterAdmin(RegisterUserRequest registerUser)
+    {
+        RegisterResult registerResult = await Register(registerUser);
+        registerResult.Data.User.Role = UserRole.Admin;
+        return registerResult;
+    }
+    
     private RegisterResult ValidateRegistrationRequest(RegisterUserRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.Username))

@@ -1,5 +1,5 @@
 @rootURL = http://localhost:5214/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzbXNtIiwiZW1haWwiOiJzbXNtQG51LmNvbSIsImp0aSI6IjFkYTQwMjliLTM3ZTgtNGQxNi04Y2VkLWEzYmMyMzEzZGFjZSIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc1Njk0MzM4NywiZXhwIjoxNzU2OTQ2OTg3LCJpYXQiOjE3NTY5NDMzODcsImlzcyI6ImVjb21tZXJjZS1hcGkiLCJhdWQiOiJlY29tbWVyY2UtY2xpZW50In0.bTLgN02_uDqAY3X0KbBTO06aplriapC0auVJXM3l3ng
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzbXNtU3VwZXJBZG1pbiIsImVtYWlsIjoic21zbUBzdXBlcmFkbWluLmNvbSIsImp0aSI6IjI5NDgzOTMyLTczMDgtNDNiZC1iODIyLWU2Zjc3ODQ3YmZhZiIsInJvbGUiOiJTdXBlckFkbWluIiwibmJmIjoxNzU3MDA2ODM5LCJleHAiOjE3NTcwMTA0MzksImlhdCI6MTc1NzAwNjgzOSwiaXNzIjoiZWNvbW1lcmNlLWFwaSIsImF1ZCI6ImVjb21tZXJjZS1jbGllbnQifQ.cXb8uHSVqnxCXuxG5LurR0R7edflFm9eVco69D0oynU
 GET {{rootURL}}
 
 ###
@@ -16,12 +16,35 @@ Content-Type: application/json
 }
 
 ###
+POST {{rootURL}}/auth/register-admin
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "username": "smsmAdmin",
+  "firstName": "Abdelrahman",
+  "lastName": "Alsammany", 
+  "password": "123456",
+  "email": "smsm@admin.com",
+  "dateOfBirth": "2003-09-05"
+}
+
+###
 POST {{rootURL}}/auth/login
 Content-Type: application/json
 
 {
   "username": "smsm",
   "password": "123"
+}
+
+###
+POST {{rootURL}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "smsmSuperAdmin",
+  "password": "123456"
 }
 
 ###

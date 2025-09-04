@@ -1,5 +1,6 @@
 using eCommerce.Application.Services;
 using eCommerce.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.API.Controllers
@@ -35,5 +36,18 @@ namespace eCommerce.API.Controllers
 
             return StatusCode(201, registerResult.Data);
         }
+
+        [HttpPost]
+        [Route("register-admin")]
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<ActionResult> RegisterAdmin(RegisterUserRequest registerUser)
+        {
+            RegisterResult registerResult = await _authService.RegisterAdmin(registerUser);
+            if (registerResult.Success == false)
+                return BadRequest(registerResult.Message);
+
+            return StatusCode(201, registerResult.Data);
+        }
+
     }
 }
