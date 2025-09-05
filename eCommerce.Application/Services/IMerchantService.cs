@@ -9,4 +9,5 @@ public interface IMerchantService
 
     public Task<MerchantDto> Create(string merchantName, int adminId);
     public Task<IEnumerable<MerchantDto>> SearchMerchantsByName(string searchTerm);
+    public Task<IEnumerable<CategoryDto>> GetMerchantCategories(int merchantId);
 }

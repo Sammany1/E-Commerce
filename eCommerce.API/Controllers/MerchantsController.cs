@@ -9,11 +9,11 @@ namespace eCommerce.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class MerchantController : ControllerBase
+    public class MerchantsController : ControllerBase
     {
         private readonly IMerchantService _merchant;
 
-        public MerchantController(IMerchantService merchant)
+        public MerchantsController(IMerchantService merchant)
         {
             _merchant = merchant;
         }
@@ -24,7 +24,7 @@ namespace eCommerce.API.Controllers
         {
             string adminIdString = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            MerchantDto merchantDto = await _merchant.Create(merchant.MerchantName, int.Parse(adminIdString));
+            MerchantDto merchantDto = await _merchant.Create(merchant.Name, int.Parse(adminIdString));
             if (merchantDto == null)
                 return BadRequest("merchant name already exist!");
 
@@ -36,6 +36,15 @@ namespace eCommerce.API.Controllers
         {
             var merchants = await _merchant.SearchMerchantsByName(name);
             return Ok(merchants);
+        }
+
+        [HttpGet("{merchantId}/categories")]
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetMerchantCategories(int merchantId)
+        {
+            var categories = await _merchant.GetMerchantCategories(merchantId);
+            if (categories == null)
+                return NotFound();
+            return Ok(categories);
         }
     }
 }

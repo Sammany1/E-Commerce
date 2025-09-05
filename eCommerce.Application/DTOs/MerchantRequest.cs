@@ -2,5 +2,5 @@ namespace eCommerce.Application.DTOs;
 
 public class MerchantRequest
 {
-    public string MerchantName { get; set; }
+    public string Name { get; set; }
 }

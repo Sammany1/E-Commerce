@@ -4,16 +4,16 @@ namespace eCommerce.Domain.Models;
 
 public class Merchant : BaseEntity
 {
-    public string MerchantName { get; set; }
+    public string Name { get; set; }
 
     [ForeignKey("AdminId")]
     public User User { get; set; }
     public int AdminId { get; set; }
     public ICollection<Product> Products { get; set; }
 
-    public Merchant(string merchantName, int adminId)
+    public Merchant(string name, int adminId)
     {
-        MerchantName = merchantName;
+        Name = name;
         AdminId = adminId;
     }
 }

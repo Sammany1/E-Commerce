@@ -43,4 +43,13 @@ public class MerchantService : IMerchantService
         var merchants = await _merchant.SearchMerchantsByName(searchTerm);
         return merchants.Select(m => new MerchantDto(m)).ToList();
     }
+
+    public async Task<IEnumerable<CategoryDto>> GetMerchantCategories(int merchantId)
+    {
+        var categories = await _merchant.GetMerchantCategories(merchantId);
+        if (categories == Enumerable.Empty<Category>())
+            return null;
+        return categories.Select(c => new CategoryDto(c)).ToList();
+    }
+
 }

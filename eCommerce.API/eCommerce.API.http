@@ -1,5 +1,5 @@
 @rootURL = http://localhost:5214/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDA2Iiwic3ViIjoic21zbUFkbWluIiwiZW1haWwiOiJzbXNtQGFkbWluLmNvbSIsImp0aSI6Ijk1YWEzZWMyLTIyZDAtNDM5Ni1hZGFhLTE4OTI3NTViMGJiZCIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc1NzAxMzYxMiwiZXhwIjoxNzU3MDE3MjEyLCJpYXQiOjE3NTcwMTM2MTIsImlzcyI6ImVjb21tZXJjZS1hcGkiLCJhdWQiOiJlY29tbWVyY2UtY2xpZW50In0.SDMYderP6ISkq0wgOG67qNEjCqdy5bsBt9l9ewat3Xo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwic3ViIjoic21zbSIsImVtYWlsIjoic21zbUBudS5jb20iLCJqdGkiOiIzN2NjZTAzOS0xMDNjLTQ5NDctYTcxMC03YzcwNjliYWJhYzUiLCJyb2xlIjoiQ3VzdG9tZXIiLCJuYmYiOjE3NTcxMDY2NDMsImV4cCI6MTc1NzExMDI0MywiaWF0IjoxNzU3MTA2NjQzLCJpc3MiOiJlY29tbWVyY2UtYXBpIiwiYXVkIjoiZWNvbW1lcmNlLWNsaWVudCJ9.Pp95fW5CF7yyU0O98hoRvZgYjWrmFbk2z3y6Zzl3hRQ
 
 ###
 POST {{rootURL}}/auth/register
@@ -69,13 +69,13 @@ Content-Type: application/json
 }
 
 ###
-GET  {{rootURL}}/user/smsm
+GET  {{rootURL}}/users/smsm
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 
 ###
-POST {{rootURL}}/merchant
+POST {{rootURL}}/merchants
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -84,5 +84,9 @@ Authorization: Bearer {{token}}
 }
 
 ###
-GET {{rootURL}}/merchant/search?name=pizza
+GET {{rootURL}}/merchants/search?name=pizza
+Authorization: Bearer {{token}}
+
+###
+GET {{rootURL}}/merchants/1/categories
 Authorization: Bearer {{token}}
