@@ -20,10 +20,10 @@ namespace eCommerce.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CategoryDto>> CreateCategory(CategoryRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.CategoryName))
+            if (string.IsNullOrWhiteSpace(request.name))
                 return BadRequest();
 
-            var categoryDto = await _category.CreateCategory(request.CategoryName);
+            var categoryDto = await _category.CreateCategory(request.name);
             if (categoryDto == null)
                 return BadRequest("Cateogry Name Already Exist");
 

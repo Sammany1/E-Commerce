@@ -24,7 +24,7 @@ namespace eCommerce.API.Controllers
         {
             string adminIdString = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            MerchantDto merchantDto = await _merchant.Create(merchant.Name, int.Parse(adminIdString));
+            MerchantDto merchantDto = await _merchant.Create(merchant.name, int.Parse(adminIdString));
             if (merchantDto == null)
                 return BadRequest("merchant name already exist!");
 

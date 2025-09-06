@@ -78,7 +78,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "merchantName": "Pizza King"
+  "name": "Pizza King"
 }
 
 ###
@@ -94,7 +94,7 @@ GET {{rootURL}}/products
 Authorization: Bearer {{token}}
 
 ### Get all products filtered by category
-GET {{rootURL}}/products?category=food
+GET {{rootURL}}/products?category=Pizza
 Authorization: Bearer {{token}}
 
 ### Search all products
@@ -106,7 +106,7 @@ GET {{rootURL}}/products/merchant/1
 Authorization: Bearer {{token}}
 
 ### Get products for a specific merchant filtered by category
-GET {{rootURL}}/products/merchant/1?category=food
+GET {{rootURL}}/products/merchant/1?category=Pizza
 Authorization: Bearer {{token}}
 
 ### Search products for a specific merchant
@@ -149,5 +149,5 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "categoryName": "Pizza"
+  "name": "Pizza"
 }
