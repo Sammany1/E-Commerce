@@ -13,7 +13,14 @@ public class MerchantService : IMerchantService
     {
         _merchant = merchant;
     }
-    public async Task<MerchantDto> GetMerchantByMerchantName(string merchantName)
+
+    public async Task<MerchantDto> GetMerchantById(int merchantId)
+    {
+        var merchant = await _merchant.GetById(merchantId);
+        MerchantDto merchantDto = new MerchantDto(merchant);
+        return merchantDto;
+    }
+    public async Task<MerchantDto> GetMerchantByName(string merchantName)
     {
         if (string.IsNullOrWhiteSpace(merchantName))
             return null;

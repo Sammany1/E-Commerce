@@ -9,6 +9,12 @@ public class MerchantRepository(eCommerceDbContext context) : BaseRepository<Mer
 {
     private readonly DbSet<Merchant> _merchant = context.Set<Merchant>();
     private readonly DbSet<Product> _product = context.Set<Product>();
+
+    public async Task<bool> MerchantExists(int merchantId)
+    {
+        return await _merchant.AnyAsync(m => m.Id == merchantId);
+    }
+
     public async Task<Merchant> GetMerchantByName(string merchantName)
     {
         return await _merchant.FirstOrDefaultAsync(m => m.Name.ToLower() == merchantName.ToLower());
