@@ -1,5 +1,5 @@
-using eCommerce.Application.DTOs;
-using eCommerce.Application.Services;
+using eCommerce.Infrastructure.DTOs;
+using eCommerce.Infrastructure.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

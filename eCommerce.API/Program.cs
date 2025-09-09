@@ -1,10 +1,10 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using eCommerce.Infrastructure.Contexts;
-using eCommerce.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using eCommerce.API.Extensions;
 
 namespace eCommerce.API;
 
