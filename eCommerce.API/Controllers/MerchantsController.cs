@@ -18,6 +18,13 @@ namespace eCommerce.API.Controllers
             _merchant = merchant;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<ICollection<MerchantDto>>> GetAllMerchant()
+        {
+            var merchants = await _merchant.GetAllMerchant();
+            return Ok(merchants);
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(MerchantRequest merchant)

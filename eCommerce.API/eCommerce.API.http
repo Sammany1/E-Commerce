@@ -1,5 +1,5 @@
 @rootURL = http://localhost:5214/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDA2Iiwic3ViIjoic21zbUFkbWluIiwiZW1haWwiOiJzbXNtQGFkbWluLmNvbSIsImp0aSI6ImZiNTRiYzQyLTZjOWYtNGQ1Mi1iMDNkLTA4NDI0YjgwOWFiYSIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc1NzE3MTI0OCwiZXhwIjoxNzU3MTc0ODQ4LCJpYXQiOjE3NTcxNzEyNDgsImlzcyI6ImVjb21tZXJjZS1hcGkiLCJhdWQiOiJlY29tbWVyY2UtY2xpZW50In0.FsIcgUHAV4kMqGGEb8Ple-c5-0RcTIyUesiD203QSfM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwic3ViIjoic21zbSIsImVtYWlsIjoic21zbUBudS5jb20iLCJqdGkiOiJmMmNjZTc1My1mNDg3LTQ4NzgtOTVkYy0wYWJmM2VmNDBjY2MiLCJyb2xlIjoiQ3VzdG9tZXIiLCJuYmYiOjE3NTc3MjEyODUsImV4cCI6MTc1NzcyNDg4NSwiaWF0IjoxNzU3NzIxMjg1LCJpc3MiOiJlY29tbWVyY2UtYXBpIiwiYXVkIjoiZWNvbW1lcmNlLWNsaWVudCJ9.jT5Y9DnfA6EHeVaRGRdVGOlhyCNcWfeYhsqpbiu_BnM
 POST {{rootURL}}/auth/register
 Content-Type: application/json
 
@@ -67,10 +67,21 @@ Content-Type: application/json
 }
 
 ###
+GET {{rootURL}}/users/me
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
 GET  {{rootURL}}/users/smsm
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+
+###
+GET {{rootURL}}/merchants
+Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 POST {{rootURL}}/merchants

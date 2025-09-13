@@ -23,4 +23,10 @@ public class UserService : IUserService
         UserDto userDto = new UserDto(user);
         return userDto;
     }
+
+    public async Task<UserProfileDto> GetProfile(int id)
+    {
+        var user = await _user.GetById(id);
+        return new UserProfileDto(user);
+    }
 }

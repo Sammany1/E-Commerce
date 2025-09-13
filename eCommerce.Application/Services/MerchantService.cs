@@ -14,6 +14,12 @@ public class MerchantService : IMerchantService
         _merchant = merchant;
     }
 
+    public async Task<IEnumerable<MerchantDto>> GetAllMerchant(int pageNumber = 1, int pageSize = 10)
+    {
+        var merchants = await _merchant.GetAll();
+        return merchants.Select(merchant => new MerchantDto(merchant)).ToList();
+    }
+
     public async Task<MerchantDto> GetMerchantById(int merchantId)
     {
         var merchant = await _merchant.GetById(merchantId);

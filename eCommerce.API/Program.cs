@@ -46,12 +46,22 @@ public class Program
 
         builder.Services.AddAuthorization();
 
-        builder.Services.AddControllers()
-            .AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            });
+        // builder.Services.AddControllers()
+        //     .AddJsonOptions(options =>
+        //     {
+        //         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        //     });
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontend",
+                policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -66,6 +76,8 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.UseCors("AllowFrontend"); 
 
         app.Run();
     }
