@@ -25,6 +25,12 @@ public class MerchantRepository(eCommerceDbContext context) : BaseRepository<Mer
         return await _merchant.AnyAsync(m => m.Name.ToLower() == merchantName.ToLower());
     }
 
+    public async Task<IEnumerable<Merchant>> GetMerchantsByAdminId(int adminId)
+    {
+
+        return await _merchant.Where(m => m.AdminId == adminId).ToListAsync();
+    }
+    
     public async Task<IEnumerable<Merchant>> SearchMerchantsByName(string searchTerm)
     {
         if (string.IsNullOrWhiteSpace(searchTerm))

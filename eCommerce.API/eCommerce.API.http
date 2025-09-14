@@ -1,5 +1,5 @@
 @rootURL = http://localhost:5214/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwic3ViIjoic21zbSIsImVtYWlsIjoic21zbUBudS5jb20iLCJqdGkiOiJmMmNjZTc1My1mNDg3LTQ4NzgtOTVkYy0wYWJmM2VmNDBjY2MiLCJyb2xlIjoiQ3VzdG9tZXIiLCJuYmYiOjE3NTc3MjEyODUsImV4cCI6MTc1NzcyNDg4NSwiaWF0IjoxNzU3NzIxMjg1LCJpc3MiOiJlY29tbWVyY2UtYXBpIiwiYXVkIjoiZWNvbW1lcmNlLWNsaWVudCJ9.jT5Y9DnfA6EHeVaRGRdVGOlhyCNcWfeYhsqpbiu_BnM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDA2Iiwic3ViIjoic21zbUFkbWluIiwiZW1haWwiOiJzbXNtQGFkbWluLmNvbSIsImp0aSI6IjhlMmFlZGEyLTIzYzktNDljMS1iZWY3LTQ5YTJkODhhYTgyZSIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc1NzgxNTg3NCwiZXhwIjoxNzU3ODE5NDc0LCJpYXQiOjE3NTc4MTU4NzQsImlzcyI6ImVjb21tZXJjZS1hcGkiLCJhdWQiOiJlY29tbWVyY2UtY2xpZW50In0.VovgaPkC7ZRYcXY35gX-K0sZXapXNILOlIJ8uKL06K0
 POST {{rootURL}}/auth/register
 Content-Type: application/json
 
@@ -84,6 +84,11 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
+GET {{rootURL}}/merchants/1006
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
 POST {{rootURL}}/merchants
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -160,5 +165,5 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Pizza"
+  "name": "Salads"
 }

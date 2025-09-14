@@ -25,6 +25,14 @@ namespace eCommerce.API.Controllers
             return Ok(merchants);
         }
 
+        [HttpGet("{adminId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ICollection<MerchantDto>>> GetMerchantsByAdminId(int adminId)
+        {
+            var merchants = await _merchant.GetMerchantsByAdminId(adminId);
+            return Ok(merchants);
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(MerchantRequest merchant)
